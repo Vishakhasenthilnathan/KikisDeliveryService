@@ -35,10 +35,10 @@ public class ApplicationTest {
     @Test
     public void Application_Test() throws Exception{
         // Arrange
-        Path inputFile = Paths.get("src","test","resources","test_input_one.txt");
+        Path inputFile = Paths.get("src","test","resources", "test_kiki_delivery_service.txt");
         List<String> arguments= new ArrayList<>(List.of("INPUT_FILE="+inputFile.toString()));
-        Path actualOutputFile = Paths.get("src","test","resources","test_input_one_actual_output.txt");
-        Path expectedOutputFile = Paths.get("src","test","resources","test_input_one_expected_output.txt");
+        Path actualOutputFile = Paths.get("src","test","resources", "test_kiki_delivery_service_actual_output.txt");
+        Path expectedOutputFile = Paths.get("src","test","resources", "test_kiki_delivery_service_expected_output.txt");
         // Act
 
         String actualOutput = tapSystemOut(() -> App.run(arguments));
