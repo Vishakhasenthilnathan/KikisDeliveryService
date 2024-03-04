@@ -1,53 +1,48 @@
 package org.eve;
 
-import org.eve.commands.CommandKeyword;
 import org.eve.commands.CommandRegistry;
-import org.eve.entities.OfferCode;
-import org.eve.entities.Package;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.eve.entities.OfferCode.parseOfferCode;
-
 public class App {
     public static void main(String[] args) {
-//        if (args.length != 1) {
-//            throw new RuntimeException();
-//        }
-//        List<String> commandLineArgs = new ArrayList<>(Arrays.asList(args));
-//        run(commandLineArgs);
         Scanner scanner = new Scanner(System.in);
+        try{
+            System.out.println("Welcome to Kiki's Delivery Service! Please provide what information u need:");
 
-        System.out.println("Welcome to Kiki's Delivery Service! Please provide what information u need:");
-        Configuration conf = Configuration.getInstance();
-
-//        CommandRegistry commandRegistry = conf.getCommandRegistry();
-        // Prompt for base_delivery_cost no_of_packges
-        double baseDeliveryCost = scanner.nextDouble();
-        int noOfPackages = scanner.nextInt();
-        scanner.nextLine(); // Consume newline character
-
-        List< Package> packageList = new ArrayList<>();
-        while(noOfPackages>0){
-            String packageInfo = scanner.nextLine();
-            String[] packageIn = packageInfo.split(" ");
-            String packageId = packageIn[0];
-            int weight = Integer.parseInt(packageIn[1]);
-            int distance = Integer.parseInt(packageIn[2]);
-            OfferCode offerCode = parseOfferCode(packageIn[3]);
-            packageList.add(new Package(packageId,weight,distance,offerCode));
-            noOfPackages--;
+            List<String> tokens = new ArrayList<>();
+            //baseDeliveryCost
+            tokens.add(scanner.next());
+            String numberOfPackages = scanner.next();
+            tokens.add(numberOfPackages);
+            scanner.nextLine();
+            int noOfPackages = Integer.parseInt(numberOfPackages);
+            while (noOfPackages > 0) {
+                String packageInfo = scanner.nextLine();
+                String[] packageIn = packageInfo.split(" ");
+                String packageId = packageIn[0];
+                tokens.add(packageId);
+                String weight = packageIn[1];
+                String distance = packageIn[2];
+                String offerCode = packageIn[3];
+                tokens.add(weight);
+                tokens.add(distance);
+                tokens.add(offerCode);
+                noOfPackages--;
+            }
+            run(tokens);
         }
-//        // Print user information
-        packageList.forEach(System.out::println);
-
-        scanner.close();
+        catch (Exception e){
+            throw new InputMismatchException(e.getMessage());
+        }
+        finally {
+            scanner.close();
+        }
     }
 
     public static void run(List<String> commandLineArgs) {

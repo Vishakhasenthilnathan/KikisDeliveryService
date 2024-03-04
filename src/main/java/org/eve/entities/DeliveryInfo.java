@@ -14,7 +14,8 @@ public class DeliveryInfo {
     }
 
     public void setEstimatedDeliveryTime(double estimatedDeliveryTime) {
-        this.estimatedDeliveryTime = estimatedDeliveryTime;
+        double estimatedTime = Math.floor(estimatedDeliveryTime * 100.0) / 100.0;
+        this.estimatedDeliveryTime = estimatedTime;
     }
 
     public DeliveryInfo(int baseDeliveryCost, String packageId) {

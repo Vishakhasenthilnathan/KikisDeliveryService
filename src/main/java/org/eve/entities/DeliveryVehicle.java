@@ -4,18 +4,10 @@ import java.util.List;
 
 public class DeliveryVehicle {
 
-    private List<String> packageList;
     private int id;
     private boolean isAvailable;
     private double timeAtWhichDeliveryCompletes;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private List<String> packageList;
 
     public DeliveryVehicle(int id, List<String> packageList, boolean isAvailable, double timeAtWhichDeliveryCompletes) {
         this.id = id;
@@ -37,11 +29,12 @@ public class DeliveryVehicle {
     }
 
     public void setTimeAtWhichDeliveryCompletes(double timeAtWhichDeliveryCompletes) {
-        this.timeAtWhichDeliveryCompletes = timeAtWhichDeliveryCompletes;
+        double time = Math.floor(timeAtWhichDeliveryCompletes * 100.0) / 100.0;
+        this.timeAtWhichDeliveryCompletes = time;
     }
 
-    public List<String> getPackageList() {
-        return packageList;
+    public int getId() {
+        return id;
     }
 
     public void setPackageList(List<String> packageList) {

@@ -22,6 +22,7 @@ public class CalculateDeliveryTimeCommand implements ICommand{
     }
     @Override
     public void invoke(List<String> tokens) {
+
         int baseDeliveryCost = Integer.parseInt(tokens.get(0));
         int numberOfPackages = Integer.parseInt(tokens.get(1));
         int token = 2;
@@ -37,10 +38,10 @@ public class CalculateDeliveryTimeCommand implements ICommand{
         }
 
         int numberOfVehicles = Integer.parseInt(tokens.get(token++));
-        int maxSpeedOfVehicles  = Integer.parseInt(tokens.get(token++));
-        int maxCarriageWeightOfVehicles  = Integer.parseInt(tokens.get(token++));
+        int maxSpeed  = Integer.parseInt(tokens.get(token++));
+        int maxCapacityLoad  = Integer.parseInt(tokens.get(token++));
 
-        deliveryVehiclesService.registerDeliveryVehicleInfo(numberOfVehicles,maxCarriageWeightOfVehicles,maxSpeedOfVehicles,packageService.getAllPackages().size());
+        deliveryVehiclesService.registerDeliveryVehiclesInfo(numberOfVehicles,maxCapacityLoad,maxSpeed);
 
         List<DeliveryInfo> deliveryInfo = deliveryInfoService.getDeliveryTimeInfoForAllPackages(baseDeliveryCost);
         deliveryInfo.forEach(System.out::println);

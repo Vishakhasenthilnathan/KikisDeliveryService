@@ -34,7 +34,7 @@ public class Configuration {
     private final IDeliveryVehiclesRepository deliveryVehiclesRepository = new DeliveryVehiclesRepository();
     private final PackageService packageService = new PackageService(packageRepository);
     private final DiscountService discountService = new DiscountService(discountRepository);
-    private final DeliveryVehiclesService deliveryVehiclesService = new DeliveryVehiclesService(packageService,deliveryVehiclesRepository);
+    private final DeliveryVehiclesService deliveryVehiclesService = new DeliveryVehiclesService(deliveryVehiclesRepository);
     private final DeliveryInfoService deliveryInfoService = new DeliveryInfoService(packageService, discountService,deliveryVehiclesService, deliveryInfoRepository);
     private final CalculateDeliveryCostCommand calculateDeliveryCostCommand = new CalculateDeliveryCostCommand(deliveryInfoService, packageService);
     private final CalculateDeliveryTimeCommand calculateDeliveryTimeCommand = new CalculateDeliveryTimeCommand(deliveryInfoService,packageService, deliveryVehiclesService);

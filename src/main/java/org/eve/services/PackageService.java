@@ -5,6 +5,7 @@ import org.eve.entities.Package;
 import org.eve.repositories.interfaces.IPackageRepository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PackageService {
@@ -18,16 +19,13 @@ public class PackageService {
         packageRepository.save(new Package(id, weight, distance, offerCode));
     }
 
-    public List<Package> getAllPackages() {
+    public HashMap<String, Package> getAllPackages() {
         return packageRepository.findAll();
     }
 
-    public Package getPackage(String id) {
-        return packageRepository.findById(id);
-    }
     public List<Package> getPackageByPackageIds(List<String> packageIds) {
         List<Package> packageList = new ArrayList<>();
-        for (String _package: packageIds) {
+        for (String _package : packageIds) {
             packageList.add(packageRepository.findById(_package));
         }
         return packageList;

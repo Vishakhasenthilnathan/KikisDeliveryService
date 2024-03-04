@@ -33,7 +33,6 @@ public class CalculateDeliveryCostCommand implements ICommand {
 
             numberOfPackages--;
         }
-
         List<DeliveryInfo> deliveryInfo = deliveryInfoService.getDeliveryCostInfoForAllPackages(baseDeliveryCost);
         deliveryInfo.forEach(System.out::println);
     }

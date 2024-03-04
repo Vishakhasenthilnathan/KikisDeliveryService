@@ -3,20 +3,14 @@ package org.eve.commands;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class CommandRegistry {
     private static final Map<String, ICommand> commands = new HashMap<>();
-
     public void registerCommand(String commandKeyword, ICommand command) {
         commands.putIfAbsent(commandKeyword, command);
     }
     private ICommand get(String commandName) {
         return commands.get(commandName);
-    }
-
-    private List<String> parse(String input) {
-        return Arrays.stream(input.split(" ")).collect(Collectors.toList());
     }
 
     public void invokeCommand(BufferedReader reader, String line) throws IOException {
@@ -54,4 +48,5 @@ public class CommandRegistry {
         }
         return tokens;
     }
+
 }
